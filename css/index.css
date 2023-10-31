@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    overflow-x: hidden;
+}
+
+.quiz-wrapper {
+    background-color: maroon;
+    width: 100%;
+    height: 100vh;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden;
+}
+
+.quiz-item {
+    background-color: white;
+    border-radius: 20px;
+    width: 80%;
+    height: 80vh;
+}
+
+.border {
+    cursor: pointer !important;
+    transition: all ease-in-out 0.5s;
+}
+
+.border:hover {
+    transform: scale(1.03);
+}
+
+.question {
+    width: 90%;
+    border-radius: 10px;
+    background-color: maroon;
+}
+
+.lead-text {
+    width: 90%;
+    background-color: rgb(185, 177, 177) !important;
+}
+
+.modal {
+    width: 100%;
+    height: 100vh;
+}
+
+.modal-container {
+    width: 100%;
+    height: 100vh;
+    padding-top: 150px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-wrapper {
+    background-color: maroon;
+    width: 50%;
+    height: 50vh;
+    padding: 10px 200px;
+}
+.btn-danger {
+    background-color: maroon !important;
+    border: none;
+}
+
+.btn-primary {
+    background-color: green !important;
+    border: none;
+}
+.bg-danger {
+    background-color: green !important;
+}
+
+.loader {
+    border: 5px solid #ececec;
+    border-top: 5px solid green;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+    left: 130px;
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+        opacity: 60%;
+       
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 100%;
+    }
+}
+
+@media only screen and (max-width: 1115px) {
+    .modal-wrapper {
+        width: 80%;
+        height: 50vh;
+        padding: 10px 250px;
+    }
+}
+
+
+@media only screen and (max-width: 900px) {
+    .modal-wrapper {
+        width: 80%;
+        height: 50vh;
+        padding: 10px 140px;
+    }
+    .loader {
+        left: 130px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .quiz-wrapper {
+        width: 100%;
+        height: 100vh;
+    }
+    .quiz-item {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .modal-wrapper {
+        width: 80%;
+        height: 50vh;
+        padding: 10px 50px;
+    }
+
+    .loader {
+        left: 90px;
+    }
+}
