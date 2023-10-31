@@ -129,7 +129,7 @@ function showQuiz() {
 
     let quizItem = `<div class="quiz-item">
         <div>
-            <div class="row">
+            <div class="row pt-3 pt-md-2">
                 <div class="col-2 ps-4">
                     <h3 class="fw-bold">${indexes}/10</h3>
                 </div>
@@ -137,7 +137,7 @@ function showQuiz() {
                     <h1 class="text-center fw-bold text-secondary">QUIZ</h1>
                 </div>
             </div>
-            <p class="question mx-auto text-center py-3 px-1 fw-bold text-white">${datas.question}</p>
+            <p class="question mx-auto text-center mt-3 py-3 px-1 fw-bold text-white">${datas.question}</p>
             <div class="row gy-md-5 gy-4 mx-4 mt-4">
                 <div class="col-md-6">
                     <div class="opt bg-white rounded-5">
@@ -169,10 +169,10 @@ function showQuiz() {
                 </div>
             </div>
         </div>
-        <div class="mx-auto justify-content-center d-flex align-items-center py-2 lead-text rounded mt-3">
+        <div class="mx-auto justify-content-center d-flex align-items-center py-2 lead-text rounded mt-5 mt-md-4">
             <p class="mb-0 fw-bold score">Choose an Option</p>
         </div>
-        <div class="row pt-5 px-5">
+        <div class="row pt-5 px-5 mt-4">
             <div class="col-6">
                 <button type="button" class="btn btn-danger w-75" onclick="showPrevQuiz()">Prev</button>
             </div>
