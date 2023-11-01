@@ -119,18 +119,19 @@ let result = 0;
 let wrong = 0;
 let correct = 10;
 
+
 function showQuiz() {
     let datas = arrayOFQuiz[currentQuiz];
     let isLastQuiz = currentQuiz === arrayOFQuiz.length - 1;
 
     let nextButton = isLastQuiz
-        ? `<button type="button" class="btn btn-primary w-75 submitbtn" onclick="submitQuiz()">Submit</button>`
+    ? `<button type="button" class="btn btn-primary w-75 submitbtn" onclick="submitQuiz()">Submit</button>`
         : `<button type="button" class="btn btn-danger w-75" id="nextButton" onclick="showNextQuiz()">Next</button>`;
 
     let quizItem = `<div class="quiz-item">
         <div>
-            <div class="row pt-3 pt-md-2">
-                <div class="col-4 ps-4">
+            <div class="row pt-3 pt-md-2 head-text">
+                <div class="col-4 ps-4 ">
                     <h5 class="fw-bold">${indexes} of 10</h5>
                 </div>
                 <div class="col-5 text-center">
@@ -139,22 +140,22 @@ function showQuiz() {
             </div>
             <p class="question mx-auto text-center mt-3 py-3 px-1 fw-bold text-white">${datas.question}</p>
             <div class="row gy-md-5 gy-4 mx-4 mt-4">
-                <div class="col-md-6">
+                <div class="col-md-6 opt-wrap">
                     <div class="bg-white rounded-5">
                     <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[0]}</button>
             </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 opt-wrap">
                     <div class="bg-white rounded-5">
                     <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[1]}</button>
             </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 opt-wrap">
                     <div class="bg-white rounded-5">
                     <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[2]}</button>
             </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 opt-wrap">
                     <div class="bg-white rounded-5">
                         <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[3]}</button>
                     </div>
@@ -164,7 +165,7 @@ function showQuiz() {
         <div class="mx-auto justify-content-center d-flex align-items-center py-2 lead-text rounded mt-5 mt-md-4">
             <p class="mb-0 fw-bold score">Choose an Option</p>
         </div>
-        <div class="row pt-5 px-5 mt-4">
+        <div class="row pt-5 px-5 mt-4 btn-top">
             <div class="col-6">
                 <button type="button" class="btn btn-danger w-75" id="prevButton" onclick="showPrevQuiz()">Prev</button>
             </div>
@@ -180,14 +181,9 @@ function showQuiz() {
     let prevDisable = document.getElementById('prevButton');
     let nextDisable = document.getElementById('nextButton');
     
-
     optionElements.forEach((opt, index) => {
-        nextDisable.disabled = true;
-        prevDisable.disabled = true;
-        opt.addEventListener('click', () => {
-            nextDisable.disabled = false;
-            prevDisable.disabled = false;
-            optionElements.forEach((el, i) => {
+        opt.addEventListener('click', () => { 
+            optionElements.forEach((el, i) => { 
                 if (i === index) {
                     if (opt.textContent.trim() == arrayOFQuiz[currentQuiz].answer) {
                         opt.classList.add('correct-option');
@@ -196,6 +192,7 @@ function showQuiz() {
                     }
                 } else {
                     el.classList.remove('correct-option', 'incorrect-option');
+                    el.disabled = true; 
                 }
             });
             

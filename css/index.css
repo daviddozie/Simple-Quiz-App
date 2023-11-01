@@ -116,6 +116,10 @@ body {
         height: 50vh;
         padding: 10px 250px;
     }
+
+    .btn-top {
+        margin-top: 0px !important;
+    }
 }
 
 
@@ -128,6 +132,7 @@ body {
     .loader {
         left: 130px;
     }
+    
 }
 
 @media only screen and (max-width: 600px) {
@@ -149,6 +154,34 @@ body {
     }
 
     .loader {
-        left: 90px;
+        left: 150px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .loader {
+        left: 110px;
+    }
+
+    .head-text {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    .opt-wrap {
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .loader {
+        left: 80px;
+    }
+
+    .head-text {
+        margin-top: 5px;
+        margin-bottom: 30px;
+    }
+    .opt-wrap {
+        margin-top: 40px;
     }
 }
