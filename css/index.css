@@ -44,6 +44,7 @@ body {
 .lead-text {
     width: 90%;
     background-color: rgb(185, 177, 177) !important;
+    cursor: not-allowed;
 }
 
 .modal {
@@ -86,6 +87,14 @@ body {
     animation: spin 2s linear infinite;
     left: 130px;
     display: none;
+}
+
+.correct-option {
+    background-color: green !important;
+}
+
+.incorrect-option {
+    background-color: red !important;
 }
 
 @keyframes spin {

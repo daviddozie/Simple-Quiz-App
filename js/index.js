@@ -125,46 +125,38 @@ function showQuiz() {
 
     let nextButton = isLastQuiz
         ? `<button type="button" class="btn btn-primary w-75 submitbtn" onclick="submitQuiz()">Submit</button>`
-        : `<button type="button" class="btn btn-danger w-75" onclick="showNextQuiz()">Next</button>`;
+        : `<button type="button" class="btn btn-danger w-75" id="nextButton" onclick="showNextQuiz()">Next</button>`;
 
     let quizItem = `<div class="quiz-item">
         <div>
             <div class="row pt-3 pt-md-2">
-                <div class="col-2 ps-4">
-                    <h3 class="fw-bold">${indexes}/10</h3>
+                <div class="col-4 ps-4">
+                    <h5 class="fw-bold">${indexes} of 10</h5>
                 </div>
-                <div class="col-8 text-center">
+                <div class="col-5 text-center">
                     <h1 class="text-center fw-bold text-secondary">QUIZ</h1>
                 </div>
             </div>
             <p class="question mx-auto text-center mt-3 py-3 px-1 fw-bold text-white">${datas.question}</p>
             <div class="row gy-md-5 gy-4 mx-4 mt-4">
                 <div class="col-md-6">
-                    <div class="opt bg-white rounded-5">
-                        <div class="d-flex justify-content-center py-1 border rounded-5 opt-bg">
-                            <p class="opt mb-0">${datas.option[0]}</p>
-                        </div>
-                    </div>
+                    <div class="bg-white rounded-5">
+                    <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[0]}</button>
+            </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="opt bg-white rounded-5">
-                        <div class="d-flex justify-content-center py-1 border rounded-5 opt-bg">
-                            <p class="opt mb-0">${datas.option[1]}</p>
-                        </div>
-                    </div>
+                    <div class="bg-white rounded-5">
+                    <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[1]}</button>
+            </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="opt bg-white rounded-5">
-                        <div class="d-flex justify-content-center py-1 border rounded-5 opt-bg">
-                            <p class="opt mb-0">${datas.option[2]}</p>
-                        </div>
-                    </div>
+                    <div class="bg-white rounded-5">
+                    <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[2]}</button>
+            </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="opt bg-white rounded-5">
-                        <div class="d-flex justify-content-center py-1 border rounded-5 opt-bg">
-                            <p class="opt mb-0">${datas.option[3]}</p>
-                        </div>
+                    <div class="bg-white rounded-5">
+                        <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[3]}</button>
                     </div>
                 </div>
             </div>
@@ -174,7 +166,7 @@ function showQuiz() {
         </div>
         <div class="row pt-5 px-5 mt-4">
             <div class="col-6">
-                <button type="button" class="btn btn-danger w-75" onclick="showPrevQuiz()">Prev</button>
+                <button type="button" class="btn btn-danger w-75" id="prevButton" onclick="showPrevQuiz()">Prev</button>
             </div>
             <div class="col-6 text-end">
                 ${nextButton}
@@ -185,10 +177,29 @@ function showQuiz() {
     quizArea.innerHTML = quizItem;
 
     const optionElements = document.querySelectorAll('.opt');
+    let prevDisable = document.getElementById('prevButton');
+    let nextDisable = document.getElementById('nextButton');
+    
 
-    optionElements.forEach((opt) => {
+    optionElements.forEach((opt, index) => {
+        nextDisable.disabled = true;
+        prevDisable.disabled = true;
         opt.addEventListener('click', () => {
-            if (opt.textContent.trim() == datas.answer) {
+            nextDisable.disabled = false;
+            prevDisable.disabled = false;
+            optionElements.forEach((el, i) => {
+                if (i === index) {
+                    if (opt.textContent.trim() == arrayOFQuiz[currentQuiz].answer) {
+                        opt.classList.add('correct-option');
+                    } else {
+                        opt.classList.add('incorrect-option');
+                    }
+                } else {
+                    el.classList.remove('correct-option', 'incorrect-option');
+                }
+            });
+            
+            if (opt.textContent.trim() == arrayOFQuiz[currentQuiz].answer) {
                 document.querySelector('.score').textContent = 'Correct';
                 document.querySelector('.score').style.color = 'green';
                 result += correct;
@@ -202,6 +213,7 @@ function showQuiz() {
         });
     });
 }
+
 
 let retakeQuizBtn = document.querySelector('.retakequiz');
 
@@ -233,7 +245,7 @@ function submitQuiz() {
     setTimeout(function () {
         modal.style.display = "block";
     }, 1000);
-    document.querySelector('.submitbtn').textContent = "loading...." 
+    document.querySelector('.submitbtn').textContent = "loading....";
 }
 
 showQuiz();
