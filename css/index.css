@@ -110,10 +110,10 @@ body {
 
 .correct-option {
     background-color: rgb(1, 92, 1) !important;
-    animation: glow 200ms infinite;
+    animation: glow1 200ms infinite;
 }
 
-@keyframes glow {
+@keyframes glow1 {
     50% {
         opacity: 70%;
     }
@@ -121,9 +121,14 @@ body {
 
 .incorrect-option {
     background-color: rgb(196, 0, 0) !important;
-    animation: glow 200ms infinite;
+    animation: glow2 200ms infinite;
 }
 
+@keyframes glow2 {
+    50% {
+        opacity: 70%;
+    }
+}
 
 @keyframes spin {
     0% {
@@ -143,10 +148,6 @@ body {
         width: 80%;
         height: 50vh;
         padding: 10px 250px;
-    }
-
-    .btn-top {
-        margin-top: 0px !important;
     }
 }
 

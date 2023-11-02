@@ -122,24 +122,21 @@ let correct = 10;
 
 function showQuiz() {
     let datas = arrayOFQuiz[currentQuiz];
-    let isLastQuiz = currentQuiz === arrayOFQuiz.length - 1;
+    // let isLastQuiz = currentQuiz === arrayOFQuiz.length - 1;
 
-    let nextButton = isLastQuiz
-        ? `<button type="button" class="btn btn-primary w-75 submitbtn" id="submitBtn" onclick="submitQuiz()">Submit</button>`
-        : `<button type="button" class="btn btn-danger w-75" id="nextButton" onclick="showNextQuiz()">Next</button>`;
-
+    // let nextButton = isLastQuiz
     let quizItem = `<div class="quiz-item">
         <div>
             <div class="row pt-3 pt-md-2 head-text">
                 <div class="col-4 ps-4 ">
                     <h5 class="fw-bold">${indexes} of 10</h5>
                 </div>
-                <div class="col-5 text-center">
+                <div class="col-4 text-center">
                     <h1 class="text-center fw-bold text-secondary">QUIZ</h1>
                 </div>
             </div>
             <p class="question mx-auto text-center mt-3 py-3 px-1 fw-bold text-white">${datas.question}</p>
-            <div class="row gy-md-5 gy-4 mx-4 mt-4">
+            <div class="row gy-md-5 gy-3 mx-4 mt-2">
                 <div class="col-md-6 opt-wrap">
                     <div class="bg-white rounded-5">
                     <button type="button" class="btn btn-light btn-transparent opt border w-100  rounded-5">${datas.option[0]}</button>
@@ -165,69 +162,82 @@ function showQuiz() {
         <div class="mx-auto justify-content-center d-flex align-items-center py-2 lead-text rounded mt-5 mt-md-4">
             <p class="mb-0 fw-bold score">Choose an Option</p>
         </div>
-        <div class="row pt-5 px-5 mt-4 btn-top">
+        <div class="row py-2 px-5 mt-5 btn-top">
             <div class="col-6">
-                <button type="button" class="btn btn-danger w-75" id="prevButton" onclick="showPrevQuiz()">Prev</button>
+                <button type="button" class="btn btn-danger w-100" id="prevButton" onclick="showPrevQuiz()">Prev</button>
             </div>
             <div class="col-6 text-end">
-                ${nextButton}
+                <button type="button" class="btn btn-danger w-100" id="nextButton" onclick="showNextQuiz()">Next</button>
             </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5 mt-lg-0">
+            <button type="button" class="btn btn-primary w-50 submitbtn" id="submitBtn" onclick="submitQuiz()">Submit</button>
         </div>
     </div>`;
 
     quizArea.innerHTML = quizItem;
 
     const optionElements = document.querySelectorAll('.opt');
+    const prevBtn = document.getElementById('prevButton');
     let scoreDetails = document.querySelector('.score');
-    let submitButton = document.getElementById('submitBtn');
+    const submitButton = document.getElementById('submitBtn');
+    submitButton.style.display = 'none';
     let nextDisable = document.getElementById('nextButton');
     let bgGlow = document.querySelector('.lead-text');
-    
+
 
     optionElements.forEach((opt, index) => {
+        nextDisable.disabled = true;
+        prevBtn.disabled = true;
         opt.addEventListener('click', () => {
             scoreDetails.textContent = `is (${opt.textContent}) your final answer`;
             scoreDetails.style.color = 'maroon';
-            // optionElements.forEach((el, i) => {
-            //     if (i === index) {
-            //         if (opt.textContent == arrayOFQuiz[currentQuiz].answer) {
-            //             opt.classList.add('correct-option');
-            //         } else {
-            //             opt.classList.add('incorrect-option');
-            //         }
-            //     } else {
-            //         el.classList.remove('correct-option', 'incorrect-option');
-            //         el.disabled = true;
-            //     }
-            // });
-
-            if (opt.textContent == arrayOFQuiz[currentQuiz].answer) {
-                result += correct;
-                document.querySelector(".result").innerHTML = `${result}`;
-            } else {
-                result += wrong;
-                document.querySelector(".result").innerHTML = `${result}`;
-            }
+            nextDisable.disabled = false;
+            prevBtn.disabled = false;
 
             nextDisable.addEventListener('click', () => {
                 if (opt.textContent == arrayOFQuiz[currentQuiz].answer) {
+                    result += correct;
                     scoreDetails.textContent = 'Correct';
                     scoreDetails.style.color = 'white';
                     bgGlow.classList.add('correct-option');
+                    document.querySelector(".result").innerHTML = `${result}`;
                 } else {
+                    result += wrong;
                     scoreDetails.textContent = 'Incorrect';
                     scoreDetails.style.color = 'white';
                     bgGlow.classList.add('incorrect-option');
+                    document.querySelector(".result").innerHTML = `${result}`;
                 }
+    
+                optionElements.forEach((el, i) => {
+                    if (i === index) {
+                        el.disabled = false;
+                    } else {
+                        el.disabled = true;
+                    }
+                })
             });
+
         });
     });
 
+    nextDisable.addEventListener('click', () => {
+        if (currentQuiz < 9) {
+            nextDisable.style.display = "block";
+            prevBtn.style.display = 'block';
+            submitButton.style.display = 'none';
+
+        } else {
+            nextDisable.style.display = "none";
+            prevBtn.style.display = 'none';
+            submitButton.style.display = 'block';
+        }
+    });
+
     if (currentQuiz === 0) {
-        const prevBtn = document.getElementById('prevButton');
         prevBtn.style.display = 'none';
     } else {
-        const prevBtn = document.getElementById('prevButton');
         prevBtn.style.display = 'block';
     }
 
@@ -239,7 +249,7 @@ let retakeQuizBtn = document.querySelector('.retakequiz');
 retakeQuizBtn.addEventListener('click', () => {
     setTimeout(function () {
         location.reload();
-    }, 4000);
+    }, 3000);
     retakeQuizBtn.style.display = "none";
     document.querySelector('.loader').style.display = "block";
 })
