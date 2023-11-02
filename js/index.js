@@ -125,7 +125,7 @@ function showQuiz() {
     let isLastQuiz = currentQuiz === arrayOFQuiz.length - 1;
 
     let nextButton = isLastQuiz
-    ? `<button type="button" class="btn btn-primary w-75 submitbtn" onclick="submitQuiz()">Submit</button>`
+        ? `<button type="button" class="btn btn-primary w-75 submitbtn" id="submitBtn" onclick="submitQuiz()">Submit</button>`
         : `<button type="button" class="btn btn-danger w-75" id="nextButton" onclick="showNextQuiz()">Next</button>`;
 
     let quizItem = `<div class="quiz-item">
@@ -178,37 +178,59 @@ function showQuiz() {
     quizArea.innerHTML = quizItem;
 
     const optionElements = document.querySelectorAll('.opt');
-    let prevDisable = document.getElementById('prevButton');
+    let scoreDetails = document.querySelector('.score');
+    let submitButton = document.getElementById('submitBtn');
     let nextDisable = document.getElementById('nextButton');
+    let bgGlow = document.querySelector('.lead-text');
     
+
     optionElements.forEach((opt, index) => {
-        opt.addEventListener('click', () => { 
-            optionElements.forEach((el, i) => { 
-                if (i === index) {
-                    if (opt.textContent.trim() == arrayOFQuiz[currentQuiz].answer) {
-                        opt.classList.add('correct-option');
-                    } else {
-                        opt.classList.add('incorrect-option');
-                    }
-                } else {
-                    el.classList.remove('correct-option', 'incorrect-option');
-                    el.disabled = true; 
-                }
-            });
-            
-            if (opt.textContent.trim() == arrayOFQuiz[currentQuiz].answer) {
-                document.querySelector('.score').textContent = 'Correct';
-                document.querySelector('.score').style.color = 'green';
+        opt.addEventListener('click', () => {
+            scoreDetails.textContent = `is (${opt.textContent}) your final answer`;
+            scoreDetails.style.color = 'maroon';
+            // optionElements.forEach((el, i) => {
+            //     if (i === index) {
+            //         if (opt.textContent == arrayOFQuiz[currentQuiz].answer) {
+            //             opt.classList.add('correct-option');
+            //         } else {
+            //             opt.classList.add('incorrect-option');
+            //         }
+            //     } else {
+            //         el.classList.remove('correct-option', 'incorrect-option');
+            //         el.disabled = true;
+            //     }
+            // });
+
+            if (opt.textContent == arrayOFQuiz[currentQuiz].answer) {
                 result += correct;
                 document.querySelector(".result").innerHTML = `${result}`;
             } else {
-                document.querySelector('.score').textContent = 'Incorrect';
-                document.querySelector('.score').style.color = 'red';
                 result += wrong;
                 document.querySelector(".result").innerHTML = `${result}`;
             }
+
+            nextDisable.addEventListener('click', () => {
+                if (opt.textContent == arrayOFQuiz[currentQuiz].answer) {
+                    scoreDetails.textContent = 'Correct';
+                    scoreDetails.style.color = 'white';
+                    bgGlow.classList.add('correct-option');
+                } else {
+                    scoreDetails.textContent = 'Incorrect';
+                    scoreDetails.style.color = 'white';
+                    bgGlow.classList.add('incorrect-option');
+                }
+            });
         });
     });
+
+    if (currentQuiz === 0) {
+        const prevBtn = document.getElementById('prevButton');
+        prevBtn.style.display = 'none';
+    } else {
+        const prevBtn = document.getElementById('prevButton');
+        prevBtn.style.display = 'block';
+    }
+
 }
 
 
@@ -222,21 +244,28 @@ retakeQuizBtn.addEventListener('click', () => {
     document.querySelector('.loader').style.display = "block";
 })
 
+
 function showPrevQuiz() {
     if (currentQuiz > 0) {
         currentQuiz--;
         indexes--;
         showQuiz();
     }
+
 }
 
 function showNextQuiz() {
-    if (currentQuiz < arrayOFQuiz.length - 1) {
-        currentQuiz++;
-        indexes++;
-        showQuiz();
-    }
+    setTimeout(function () {
+        if (currentQuiz < arrayOFQuiz.length - 1) {
+            currentQuiz++;
+            indexes++;
+            showQuiz();
+        }
+    }, 2000);
 }
+
+
+
 
 function submitQuiz() {
     setTimeout(function () {

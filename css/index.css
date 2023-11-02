@@ -29,10 +29,17 @@ body {
 .border {
     cursor: pointer !important;
     transition: all ease-in-out 0.5s;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .border:hover {
     transform: scale(1.03);
+}
+
+.border:focus {
+    background-color: maroon !important;
+    color: white;
 }
 
 .question {
@@ -65,15 +72,27 @@ body {
     height: 50vh;
     padding: 10px 200px;
 }
+
 .btn-danger {
     background-color: maroon !important;
     border: none;
+    transition: ease-in-out 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: rgb(136, 26, 26) !important;
 }
 
 .btn-primary {
     background-color: green !important;
     border: none;
+    transition: ease-in-out 0.3s;
 }
+
+.btn-primary:hover {
+    background-color: rgb(47, 143, 47) !important;
+}
+
 .bg-danger {
     background-color: green !important;
 }
@@ -90,18 +109,27 @@ body {
 }
 
 .correct-option {
-    background-color: green !important;
+    background-color: rgb(1, 92, 1) !important;
+    animation: glow 200ms infinite;
+}
+
+@keyframes glow {
+    50% {
+        opacity: 70%;
+    }
 }
 
 .incorrect-option {
-    background-color: red !important;
+    background-color: rgb(196, 0, 0) !important;
+    animation: glow 200ms infinite;
 }
+
 
 @keyframes spin {
     0% {
         transform: rotate(0deg);
         opacity: 60%;
-       
+
     }
 
     100% {
@@ -129,10 +157,11 @@ body {
         height: 50vh;
         padding: 10px 140px;
     }
+
     .loader {
         left: 130px;
     }
-    
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -141,6 +170,7 @@ body {
         width: 100%;
         height: 100vh;
     }
+
     .quiz-item {
         width: 100%;
         height: 100vh;
@@ -167,6 +197,7 @@ body {
         margin-top: 20px;
         margin-bottom: 30px;
     }
+
     .opt-wrap {
         margin-top: 60px;
     }
@@ -181,6 +212,7 @@ body {
         margin-top: 5px;
         margin-bottom: 20px;
     }
+
     .opt-wrap {
         margin-top: 30px;
     }
