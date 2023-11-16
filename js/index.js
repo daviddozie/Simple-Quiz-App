@@ -170,7 +170,7 @@ function showQuiz() {
                 <button type="button" class="btn btn-danger w-100" id="nextButton" onclick="showNextQuiz()">Next</button>
             </div>
         </div>
-        <div class="d-flex justify-content-center mt-5 mt-lg-0">
+        <div class="d-flex justify-content-center mt-lg-0">
             <button type="button" class="btn btn-primary w-50 submitbtn" id="submitBtn" onclick="submitQuiz()">Submit</button>
         </div>
     </div>`;
@@ -200,12 +200,14 @@ function showQuiz() {
                     result += correct;
                     scoreDetails.textContent = 'Correct';
                     scoreDetails.style.color = 'white';
+                    bgGlow.classList.remove('incorrect-option');
                     bgGlow.classList.add('correct-option');
                     document.querySelector(".result").innerHTML = `${result}`;
                 } else {
                     result += wrong;
                     scoreDetails.textContent = 'Incorrect';
                     scoreDetails.style.color = 'white';
+                    bgGlow.classList.remove('correct-option');
                     bgGlow.classList.add('incorrect-option');
                     document.querySelector(".result").innerHTML = `${result}`;
                 }
