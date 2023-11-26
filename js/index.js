@@ -122,10 +122,8 @@ let correct = 10;
 
 function showQuiz() {
     let datas = arrayOFQuiz[currentQuiz];
-    // let isLastQuiz = currentQuiz === arrayOFQuiz.length - 1;
-
-    // let nextButton = isLastQuiz
-    let quizItem = `<div class="quiz-item">
+    
+    let quizItem = `<div class="quiz-item box-shadow">
         <div>
             <div class="row pt-3 pt-md-2 head-text">
                 <div class="col-4 ps-4 ">
@@ -162,7 +160,7 @@ function showQuiz() {
         <div class="mx-auto justify-content-center d-flex align-items-center py-2 lead-text rounded mt-5 mt-md-4">
             <p class="mb-0 fw-bold score">Choose an Option</p>
         </div>
-        <div class="row py-2 px-5 mt-5 btn-top">
+        <div class="row py-2 px-5 mt-4 btn-top">
             <div class="col-6">
                 <button type="button" class="btn btn-danger w-100" id="prevButton" onclick="showPrevQuiz()">Prev</button>
             </div>
